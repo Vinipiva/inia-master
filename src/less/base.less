@@ -1,0 +1,28 @@
+body {
+    position: relative;
+    background-color:  darken(@mainColor, 40%);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+
+.water-ripple {
+    position: absolute;
+    display: block;
+    opacity: 0.05;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 1px lighten(@mainColorDarker, 10),
+        0 0 0 3px lighten(@mainColorDarker, 20), 
+        0 0 0 5px lighten(@mainColorDarker, 30);
+    animation: ripple 4s linear forwards; // Animação mais lenta
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(15);
+        opacity: 0;
+    }
+}
