@@ -1,3 +1,18 @@
-@mainColor:hsl(263, 55%, 53%);
+@mainColor: hsl(263, 55%, 53%);
 @mainColorDarker: darken(@mainColor, 20%);
 @mainColorLighten: lighten(@mainColor, 20%);
+
+@fontColor: hsla(255, 100%, 100%, 0.8);
+@titleColor: hsla(255, 100%, 100%, 0.6);
+
+
+.titleColor {
+    color: @titleColor;
+    background: linear-gradient(to right,
+            hsla(16, 18%, 51%, 1),
+            hsla(16, 18%, 51%, 1),
+            hsla(16, 20%, 64%, 1),
+            hsla(16, 20%, 75%, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

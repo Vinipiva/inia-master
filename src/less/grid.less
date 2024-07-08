@@ -1,0 +1,42 @@
+// Grid Variables
+@total-columns: 12;  
+@gutter-width: 30px; 
+
+// Breakpoints
+@breakpoint-sm: 576px;
+@breakpoint-md: 768px;
+@breakpoint-lg: 992px;
+@breakpoint-xl: 1200px;
+
+// Mixins
+.grid-container() {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -(@gutter-width / 2); 
+  margin-right: -(@gutter-width / 2);
+}
+
+.grid-item(@columns, @columns-sm: @columns, @columns-md: @columns, @columns-lg: @columns, @columns-xl: @columns) {
+  flex: 0 0 percentage(@columns / @total-columns); 
+  max-width: percentage(@columns / @total-columns);
+  padding-left: (@gutter-width / 2);
+  padding-right: (@gutter-width / 2);
+  box-sizing: border-box;
+
+  @media (max-width: @breakpoint-sm) {
+    flex: 0 0 percentage(@columns-sm / @total-columns);
+    max-width: percentage(@columns-sm / @total-columns);
+  }
+  @media (min-width: @breakpoint-md) and (max-width: (@breakpoint-lg - 1px)) {
+    flex: 0 0 percentage(@columns-md / @total-columns);
+    max-width: percentage(@columns-md / @total-columns);
+  }
+  @media (min-width: @breakpoint-lg) and (max-width: (@breakpoint-xl - 1px)) {
+    flex: 0 0 percentage(@columns-lg / @total-columns);
+    max-width: percentage(@columns-lg / @total-columns);
+  }
+  @media (min-width: @breakpoint-xl) {
+    flex: 0 0 percentage(@columns-xl / @total-columns);
+    max-width: percentage(@columns-xl / @total-columns);
+  }
+}

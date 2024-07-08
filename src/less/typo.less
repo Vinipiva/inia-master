@@ -1,0 +1,38 @@
+// Fonts
+@font-family-primary: 'Poppins', sans-serif;
+@font-family-secondary: 'Open Sans', sans-serif;
+
+// Mixin for responsive fonts
+.responsive-font(@property, @min-vw, @max-vw, @min-value, @max-value) {
+    @media (min-width: @min-vw) and (max-width: @max-vw) {
+      @{property}: calc(@min-value + (@max-value - @min-value) * ((100vw - @min-vw) / (@max-vw - @min-vw)));
+    }
+  }
+
+body {
+    font-family: @font-family-secondary;
+    .responsive-font(font-size, 320px, 1200px, 16px, 18px);
+    line-height: 1.6;
+    color: @fontColor;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: @font-family-primary;
+    margin-bottom: 1em;
+    .titleColor();
+  }
+  
+  h1 {
+    font-size: 3em; // Base size for H1
+    .responsive-font(font-size, 320px, 1200px, 2em, 3em);
+  }
+  
+  h2 {
+    font-size: 2.5em;
+    .responsive-font(font-size, 320px, 1200px, 1.75em, 2.5em);
+  }
+  
+  h3 {
+    font-size: 2em;
+    .responsive-font(font-size, 320px, 1200px, 1.5em, 2em);
+  }
