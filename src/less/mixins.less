@@ -5,6 +5,11 @@
 @fontColor: hsla(255, 100%, 100%, 0.8);
 @titleColor: hsla(255, 100%, 100%, 0.6);
 
+@sm: 576px;
+@md: 768px;
+@lg: 992px;
+@xl: 1200px;
+@xxl: 1400px;
 
 .titleColor {
     color: @titleColor;
@@ -16,3 +21,17 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+
+.media-breakpoint-up(@breakpoint, @rules) {
+    @media (min-width: @breakpoint) {
+      @rules();
+    }
+  }
+  
+  .media-breakpoint-down(@breakpoint, @rules) {
+    @media (max-width: subtract(@breakpoint, 1px)) {
+      @rules();
+    }
+  }

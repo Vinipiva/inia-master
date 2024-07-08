@@ -1,10 +1,93 @@
 body {
     position: relative;
-    background-color:  darken(@mainColor, 50%);
+    background-color: darken(@mainColor, 50%);
     max-width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
+
+/**Hero**/
+.hero {
+    height: 40rem;
+}
+
+/**Leafs**/
+.with-leafs {
+    position: relative;
+
+    [class^="leaf-"] {
+        max-width: 30vw;
+        position: absolute;
+        opacity: 0.35;
+        z-index: -1;
+
+        &.leaf-1 {
+            top: -15%;
+            left: -30%;
+            transform: translate3d(0, 0, 0) rotate(60deg);
+        }
+
+        &.leaf-2 {
+            top: -15%;
+            right: -25%;
+            transform: translate3d(0, 0, 0) rotate(-100deg);
+        }
+
+        &.leaf-3 {
+            bottom: -15%;
+            right: -35%;
+            transform: translate3d(0, 0, 0) rotate(180deg);
+        }
+
+        &.leaf-4 {
+            bottom: 5%;
+            left: -25%;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .media-breakpoint-up(@md, {
+
+            // Positioning for larger screens
+            &.leaf-1 {
+                left: -5vw; top: -5%;
+            }
+
+            &.leaf-2 {
+                right: -5vw; top: 5%;
+            }
+
+            &.leaf-3 {
+                right: -5vw; bottom: -15%;
+            }
+
+            &.leaf-4 {
+                left: -5vw; bottom: 5%;
+            }
+        });
+
+        .media-breakpoint-up(@lg, {
+
+            // Positioning for larger screens
+            &.leaf-1 {
+                left: -5vw; top: -5%;
+            }
+
+            &.leaf-2 {
+                right: -5vw; top: -15%;
+            }
+
+            &.leaf-3 {
+                right: -5vw; bottom: -15%;
+            }
+
+            &.leaf-4 {
+                left: -5vw; bottom: 5%;
+            }
+        });
+    }
+}
+
+/** Water Ripple Effect **/
 
 .water-ripple {
     position: absolute;
@@ -15,7 +98,7 @@ body {
     border-radius: 50%;
     box-shadow:
         0 0 0 1px lighten(@mainColorDarker, 10),
-        0 0 0 3px lighten(@mainColorDarker, 20), 
+        0 0 0 3px lighten(@mainColorDarker, 20),
         0 0 0 5px lighten(@mainColorDarker, 30);
     animation: ripple 4s linear forwards; // Animação mais lenta
 }
