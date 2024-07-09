@@ -1,13 +1,30 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin"); // Adiciona o TerserPlugin
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.jsx',  // Change entry point to .jsx
+  mode: 'production', // Definir modo para production and development
+  entry: {
+    index: './src/index.jsx' // Code splitting: Ponto de entrada principal
+  }, 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true, // Limpa o diretório dist antes de cada build
+  },
+  optimization: { // Otimizações de código e split chunks
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true, // Processamento paralelo para agilizar a minificação
+      }),
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: { 
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
@@ -15,7 +32,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Use Babel for transpiling JSX
+          loader: 'babel-loader', 
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
@@ -31,17 +48,18 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        loader: 'file-loader',
-        options: {
-          name: 'images/[name].[ext]',
+        type: 'asset', // Otimiza imagens (webpack 5)
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024, // 8kb
+          },
         },
       },
-      // Remove the ejs-webpack-loader rule
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html', // Typical React template location
+      template: './public/index.html', 
     }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'src/assets/images', to: 'images' }],
@@ -54,7 +72,7 @@ module.exports = {
     compress: true,
     port: 3000,
     open: true,
-    hot: true, // Enable hot module replacement (HMR)
-    historyApiFallback: true, // Important for React Router
+    hot: true, 
+    historyApiFallback: true, 
   },
 };
