@@ -1,18 +1,25 @@
-// Clients.less
-
-.logo-list {
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+  }
+  
+  .logo-list {
     display: flex;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: transform 30s linear; /* Tempo longo para uma animação contínua */
+    width: 100%;
+    animation: scroll 60s ease-out infinite alternate;
+  
+    &:hover { 
+      animation-play-state: paused;
+    }
   }
   
   .logo-item {
-    margin-right: 1rem; /* Espaçamento entre os logos */
+    flex: 0 0 auto;
+    margin: 0 1rem; 
   }
   
   .logo-img {
-    height: 64px; /* Altura fixa para todas as imagens */
-    width: auto; /* Largura automática para se adaptar ao tamanho natural do logo */
+    height: 4rem;
+    width: auto;
   }
   

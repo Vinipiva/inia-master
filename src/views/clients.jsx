@@ -1,5 +1,5 @@
 // clients.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Função para importar todos os arquivos (SVGs e PNGs) da pasta clients
 function importAll(r) {
@@ -10,38 +10,9 @@ function importAll(r) {
   return logos;
 }
 
-const logos = importAll(require.context('../assets/images/clients', false, /\.(svg|png)$/)); // Importa tanto SVGs quanto PNGs
+const logos = importAll(require.context('../assets/images/clients', false, /\.(svg|png)$/));
 
 const Clients = () => {
-  useEffect(() => {
-    const logoContainer = document.querySelector('.logo-list');
-    const logoItems = document.querySelectorAll('.logo-item');
-
-    let offset = 0;
-    const logoWidth = logoItems[0].offsetWidth + 10; // A largura do logo mais margem
-
-    function animateLogos() {
-      setInterval(() => {
-        offset -= logoWidth;
-        logoContainer.style.transform = `translateX(${offset}px)`;
-
-        // Reset quando todos os logos passam
-        if (offset < -((logoItems.length - 6) * logoWidth)) {
-          offset = 0;
-          logoContainer.style.transition = 'none';
-          logoContainer.style.transform = `translateX(${offset}px)`;
-          setTimeout(() => {
-            logoContainer.style.transition = 'transform 1s ease-out';
-          }, 50);
-        }
-      }, 3000); // Intervalo de 3 segundos entre cada passagem
-    }
-
-    animateLogos();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Executa somente uma vez na montagem do componente
-
   return (
     <div className="container my-5">
       <div className="row">
